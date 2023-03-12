@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 异常处理方法
+     * @param ex
      * @return
      */
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
