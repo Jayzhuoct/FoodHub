@@ -1,8 +1,11 @@
 server:
   port: 8080
 spring:
+  servlet:
+    multipart:
+      file-size-threshold: 100MB
+      max-request-size: 100MB
   application:
-    #应用的名称，可选
     name: foodHub
   datasource:
     druid:
@@ -18,5 +21,5 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
-reggie:
-  path: \
+foodhub:
+  path: /Users/mac/Projects/FoodHub/src/main/resources/images/
