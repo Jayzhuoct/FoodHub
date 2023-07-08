@@ -42,8 +42,8 @@ public class CommonController {
         System.out.println("文件目录：" + basePath);
         //获取根目录
         ApplicationHome h = new ApplicationHome(getClass());
-//        File dir = h.getSource();
-//        System.out.println("获取根目录" + dir.getParentFile().toString());
+//      File dir = h.getSource();
+//      System.out.println("获取根目录" + dir.getParentFile().toString());
         File dir = new File(basePath);
         //判断当前目录是否存在
         if (!dir.exists()) {

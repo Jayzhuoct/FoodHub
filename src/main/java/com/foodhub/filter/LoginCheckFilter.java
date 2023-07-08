@@ -11,23 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 import java.io.IOException;
 
-/**
- * 检查用户是否已经完成登录
- * 创建自定义过滤器，实现Filter接口
- * 1、创建一个类，实现Filter接口
- * 2、在类上添加@WebFilter注解，指定过滤器名称和过滤路径
- * 3、实现Filter接口中的方法
- * 4、在启动类上添加@ServletComponentScan注解，扫描自定义过滤器
- * 5、在需要使用过滤器的地方，使用@Autowired注解注入
- * 6、在需要使用过滤器的地方，使用@Qualifier注解指定过滤器名称
- * 7、在需要使用过滤器的地方，使用@Order注解指定过滤器执行顺序
- * 8、在需要使用过滤器的地方，使用@ServletComponentScan注解，扫描自定义过滤器
- * 9、在需要使用过滤器的地方，使用@WebFilter注解，指定过滤器名称和过滤路径
- * 10、在需要使用过滤器的地方，使用@WebInitParam注解，指定过滤器初始化参数
- * 11、在需要使用过滤器的地方，使用@WebListener注解，指定监听器名称和监听器类型
- * 12、在需要使用过滤器的地方，使用@WebServlet注解，指定servlet名称和servlet路径
- * 13、完善过滤器的处理逻辑
- */
 @WebFilter(filterName = "loginCheckFilter",urlPatterns = "/*")
 @Slf4j
 public class LoginCheckFilter implements Filter {

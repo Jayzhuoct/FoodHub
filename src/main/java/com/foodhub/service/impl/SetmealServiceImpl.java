@@ -10,6 +10,7 @@ import com.foodhub.mapper.SetmealMapper;
 import com.foodhub.service.SetmealDishService;
 import com.foodhub.service.SetmealService;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,16 +54,13 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.in(Setmeal::getId,ids);
         queryWrapper.eq(Setmeal::getStatus,1);
-
         int count = this.count(queryWrapper);
         if(count > 0){
             //如果不能删除，抛出一个业务异常
             throw new CustomException("套餐正在售卖中，不能删除");
         }
-
         //如果可以删除，先删除套餐表中的数据---setmeal
         this.removeByIds(ids);
-
         //delete from setmeal_dish where setmeal_id in (1,2,3)
         LambdaQueryWrapper<SetmealDish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.in(SetmealDish::getSetmealId,ids);

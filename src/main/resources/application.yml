@@ -1,6 +1,13 @@
 server:
   port: 8080
 spring:
+  redis:
+    host: 120.26.82.219
+    port: 6379
+    password: zjj1028
+    timeout: 10000ms
+    database: 0
+
   servlet:
     multipart:
       file-size-threshold: 100MB
@@ -15,7 +22,6 @@ spring:
       password: root1234
 mybatis-plus:
   configuration:
-    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
