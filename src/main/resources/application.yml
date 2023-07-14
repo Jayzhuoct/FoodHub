@@ -1,12 +1,48 @@
 server:
   port: 8080
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    # 开启读写分离
+    datasource:
+      names:
+        master,slave
+      # 主数据源
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://120.26.82.219:3306/foodhub?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: zjj1028
+      # 从数据源
+      slave:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://49.232.239.122:3306/foodhub?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: zjj1028
+    masterslave:
+      # 读写分离配置
+      load-balance-algorithm-type: round_robin #轮询
+      # 最终的数据源名称
+      name: dataSource
+      # 主库数据源名称
+      master-data-source-name: master
+      # 从库数据源名称列表，多个逗号分隔
+      slave-data-source-names: slave
+    props:
+      sql:
+        show: true #开启SQL显示，默认false
   redis:
     host: 120.26.82.219
     port: 6379
     password: zjj1028
     timeout: 10000ms
     database: 0
+  cache:
+    redis:
+      time-to-live: 3600000ms
 
   servlet:
     multipart:
@@ -14,12 +50,7 @@ spring:
       max-request-size: 100MB
   application:
     name: foodHub
-  datasource:
-    druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/foodHub?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: root
-      password: root1234
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
